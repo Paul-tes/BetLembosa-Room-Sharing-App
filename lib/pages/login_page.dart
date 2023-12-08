@@ -1,9 +1,15 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:betlembosa/components/my_text_filed.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
+
+  // text controllers
+  final userNameController = TextEditingController();
+  final passwordController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,24 +37,36 @@ class LoginPage extends StatelessWidget {
               ),
 
               SizedBox(height: 25),
-              // password text field
-              Padding(
-                padding: const EdgeInsets.all(25.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey.shade400),
-                    ),
-                    fillColor: Colors.grey.shade200,
-                    filled: true,
-                  )
-                ),
+
+              // user name text field
+              MyTextField(
+                controller: userNameController,
+                hintText: "User Name",
+                obscureText: false
               ),
+
+              SizedBox(height: 10),
+              // password text field
+              MyTextField(
+                controller: passwordController,
+                hintText: "password",
+                obscureText: true,
+              ),
+
+              SizedBox(height: 10),
               // forgoten password
-              
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      "Forgot Password",
+                      style: TextStyle(color: Colors.grey[600]),
+                    ),
+                  ],
+                ),
+              )
               // sign in butoon
               
               // or continue with
