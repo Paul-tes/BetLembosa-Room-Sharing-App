@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:betlembosa/components/my_button.dart';
 import 'package:betlembosa/components/my_text_filed.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,11 @@ class LoginPage extends StatelessWidget {
   // text controllers
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
+
+  // sign user in method
+  void signUserIn() {
+
+  }
 
 
   @override
@@ -66,10 +72,42 @@ class LoginPage extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
+
+              SizedBox(height: 25.0),
               // sign in butoon
-              
+              MyButton(
+                onTap: signUserIn,
+              ),
+              SizedBox(height: 50.0),
               // or continue with
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Divider(
+                        thickness: 0.5,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Text(
+                        "Or continue with",
+                        style: TextStyle(color: Colors.grey[700]),
+                      ),
+                    ),
+                    Expanded(
+                      child: Divider(
+                        thickness: 0.5,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                  ]
+                ),
+              ),
               
               // google + apple sign in buton
               
