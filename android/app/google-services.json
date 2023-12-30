@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "737189991126",
+    "project_id": "betlembosa-auth",
+    "storage_bucket": "betlembosa-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737189991126:android:3efe3f32d652407a6a6f77",
+        "android_client_info": {
+          "package_name": "com.example.betlembosa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZtpS9MmFx4CsVCiZkYPNUDIKfhbCfDv8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
