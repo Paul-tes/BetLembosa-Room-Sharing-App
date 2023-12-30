@@ -3,20 +3,65 @@
 import 'package:betlembosa/components/my_button.dart';
 import 'package:betlembosa/components/my_text_filed.dart';
 import 'package:betlembosa/components/square_tile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   // text controllers
   final emailController = TextEditingController();
+
   final passwordController = TextEditingController();
 
   // sign user in method
-  void signUserIn() {
+  void signUserIn() async {
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }
+    );
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: emailController.text,
+      password: passwordController.text,
+      );
+    } on FirebaseAuthException catch (e) {
+      // if there is no network
+      if (e.code == 'network-request-failed') {
+        ErrorMessage("User not found");
+      }
+      // wrong email and password is entered
+      else if (e.code == 'invalid-credential') {
+        ErrorMessage('Envalid User name and Password');
+      }
+    }
+
+
+    Navigator.pop(context);
 
   }
 
+  void ErrorMessage(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(message)
+        );
+      }
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +78,7 @@ class LoginPage extends StatelessWidget {
                 Icon(
                     Icons.home_rounded,
                     size: 70,
+                    color: Colors.brown,
                   ),
         
                 SizedBox(height: 35),
