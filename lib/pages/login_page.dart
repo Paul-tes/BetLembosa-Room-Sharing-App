@@ -36,32 +36,42 @@ class _LoginPageState extends State<LoginPage> {
       email: emailController.text,
       password: passwordController.text,
       );
+
+      // pop up the circular progress after login
+      Navigator.pop(context);
+
     } on FirebaseAuthException catch (e) {
-      // if there is no network
-      if (e.code == 'network-request-failed') {
-        ErrorMessage("User not found");
-      }
-      // wrong email and password is entered
-      else if (e.code == 'invalid-credential') {
-        ErrorMessage('Envalid User name and Password');
+
+      // pop up the circular progress to show the error message.
+      Navigator.pop(context);
+
+      // login attempt errors
+      if(e.code == "network-request-failed") {
+        // netwo connection problems
+        errorLog("Connection Problem. Please check your connection.");
+      } else if(e.code == 'invalid-email') {
+        // Invalid email address use
+        errorLog('Please Provide valid email address');
+      } else if(e.code == "invalid-credential") {
+        // Incorrect email or password
+        errorLog('Envalid email and password');
       }
     }
-
-
-    Navigator.pop(context);
-
   }
 
-  void ErrorMessage(String message) {
-    showDialog(
+  void errorLog(String message) => showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text(message)
+          title: Text(
+            "Error",
+            style: TextStyle(color: Colors.white),
+            ),
+            content: Text(message, style: TextStyle(color: Colors.white),),
+            backgroundColor: Colors.red[400],
         );
-      }
+      },
     );
-  }
 
   @override
   Widget build(BuildContext context) {
