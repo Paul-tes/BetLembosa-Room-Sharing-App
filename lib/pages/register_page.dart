@@ -6,22 +6,22 @@ import 'package:betlembosa/components/square_tile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   final Function()? onTap;
-  const LoginPage({super.key, required this.onTap});
+  const RegisterPage({super.key, required this.onTap});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPage();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPage extends State<RegisterPage> {
   // text controllers
   final emailController = TextEditingController();
 
   final passwordController = TextEditingController();
 
-  // sign user in method
-  void signUserIn() async {
+  // sign up user
+  void signUserUp() async {
 
     showDialog(
       context: context,
@@ -32,6 +32,7 @@ class _LoginPageState extends State<LoginPage> {
       }
     );
 
+    // try to create user
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: emailController.text,
@@ -84,11 +85,11 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 30),
+                SizedBox(height: 20),
                 // logo
                 Icon(
                     Icons.home_rounded,
-                    size: 70,
+                    size: 40,
                     color: Colors.black,
                   ),
         
@@ -115,7 +116,15 @@ class _LoginPageState extends State<LoginPage> {
                 // password text field
                 MyTextField(
                   controller: passwordController,
-                  hintText: "password",
+                  hintText: "Password",
+                  obscureText: true,
+                ),
+        
+                SizedBox(height: 10),
+                // confirmation password
+                MyTextField(
+                  controller: passwordController,
+                  hintText: "Confirm Password",
                   obscureText: true,
                 ),
         
@@ -137,10 +146,10 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: 25.0),
                 // sign in butoon
                 MyButton(
-                  onTap: signUserIn,
-                  title: 'Sign In',
+                  onTap: signUserUp,
+                  title: 'Sign Up',
                 ),
-                SizedBox(height: 50.0),
+                SizedBox(height: 30.0),
                 // or continue with
         
                 Padding(
@@ -170,7 +179,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 
-                SizedBox(height: 30.0),
+                SizedBox(height: 25.0),
         
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -184,19 +193,19 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
         
-                SizedBox(height: 20.0),
+                SizedBox(height: 30.0),
                 // not a menber reqister now!
         
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Not a menber?'),
+                    Text('Already have an Account?'),
                     const SizedBox(width: 4),
                     GestureDetector(
                       // register now on tap to change the page.
                       onTap: widget.onTap,
                       child: Text(
-                        'Register Now',
+                        'Login Now',
                         style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,

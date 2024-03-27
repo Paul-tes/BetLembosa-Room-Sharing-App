@@ -1,5 +1,4 @@
 import 'package:betlembosa/pages/auth_page.dart';
-import 'package:betlembosa/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
         statusBarColor: Colors.transparent
       )
     );
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Authpage(),
     );
