@@ -25,6 +25,7 @@ class _RegisterPage extends State<RegisterPage> {
   // sign up user
   void signUserUp() async {
 
+    // shoe circular progressing dialog.
     showDialog(
       context: context,
       builder: (context) {
@@ -36,19 +37,23 @@ class _RegisterPage extends State<RegisterPage> {
 
     // try to create user
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: emailController.text,
-      password: passwordController.text,
-      );
-
-      // pop up the circular progress after login
-      Navigator.pop(context);
+      // check if the password and conifurmation password are the same.
+      if (passwordController.text == confiurmPasswordController.text) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+      } else {
+        Navigator.pop(context);
+        errorLog("The password does not match");
+      } 
 
     } on FirebaseAuthException catch (e) {
 
       // pop up the circular progress to show the error message.
       Navigator.pop(context);
 
+      /* error code message can be customize as follows.
       // login attempt errors
       if(e.code == "network-request-failed") {
         // netwo connection problems
@@ -63,6 +68,8 @@ class _RegisterPage extends State<RegisterPage> {
         print(e.code);
         errorLog(e.code);
       }
+      */
+      errorLog(e.code);
     }
   }
 
@@ -128,26 +135,11 @@ class _RegisterPage extends State<RegisterPage> {
                 SizedBox(height: 10),
                 // confirmation password
                 MyTextField(
-                  controller: passwordController,
+                  controller: confiurmPasswordController,
                   hintText: "Confirm Password",
                   obscureText: true,
-                ),
-        
-                SizedBox(height: 10),
-                // forgoten password
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        "Forgot Password",
-                        style: TextStyle(color: Colors.grey[600]),
-                      ),
-                    ],
-                  ),
-                ),
-        
+                ),               
+
                 SizedBox(height: 25.0),
                 // sign in butoon
                 MyButton(
