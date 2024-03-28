@@ -46,6 +46,8 @@ class _LoginPageState extends State<LoginPage> {
       // pop up the circular progress to show the error message.
       Navigator.pop(context);
 
+      /* we can customize the following error  as follows.
+
       // login attempt errors
       if(e.code == "network-request-failed") {
         // netwo connection problems
@@ -57,6 +59,9 @@ class _LoginPageState extends State<LoginPage> {
         // Incorrect email or password
         errorLog('Envalid email and password');
       }
+
+      */
+      errorLog(e.code);
     }
   }
 

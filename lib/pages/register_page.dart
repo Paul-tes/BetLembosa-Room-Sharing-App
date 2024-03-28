@@ -20,6 +20,8 @@ class _RegisterPage extends State<RegisterPage> {
 
   final passwordController = TextEditingController();
 
+  final confiurmPasswordController = TextEditingController();
+
   // sign up user
   void signUserUp() async {
 
@@ -50,13 +52,16 @@ class _RegisterPage extends State<RegisterPage> {
       // login attempt errors
       if(e.code == "network-request-failed") {
         // netwo connection problems
-        errorLog("Connection Problem. Please check your internet connection.");
+        print(e.code);
+        errorLog(e.code);
       } else if(e.code == 'invalid-email') {
         // Invalid email address use
-        errorLog('Please Provide valid email address');
+        print(e.code);
+        errorLog(e.code);
       } else if(e.code == "invalid-credential") {
         // Incorrect email or password
-        errorLog('Envalid email and password');
+        print(e.code);
+        errorLog(e.code);
       }
     }
   }
@@ -96,7 +101,7 @@ class _RegisterPage extends State<RegisterPage> {
                 SizedBox(height: 25),
                 // welcome back, you've been missed
                 Text(
-                  "Welocme to BetLembosa",
+                  "Create a BetLembosa account",
                   style: TextStyle(
                     color: Colors.grey[700],
                     fontSize: 16,
