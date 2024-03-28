@@ -6,23 +6,26 @@ import 'package:betlembosa/components/square_tile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   final Function()? onTap;
-  const LoginPage({super.key, required this.onTap});
+  const RegisterPage({super.key, required this.onTap});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPage();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPage extends State<RegisterPage> {
   // text controllers
   final emailController = TextEditingController();
 
   final passwordController = TextEditingController();
 
-  // sign user in method
-  void signUserIn() async {
+  final confiurmPasswordController = TextEditingController();
 
+  // sign up user
+  void signUserUp() async {
+
+    // shoe circular progressing dialog.
     showDialog(
       context: context,
       builder: (context) {
@@ -32,34 +35,39 @@ class _LoginPageState extends State<LoginPage> {
       }
     );
 
+    // try to create user
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: emailController.text,
-      password: passwordController.text,
-      );
-
-      // pop up the circular progress after login
-      Navigator.pop(context);
+      // check if the password and conifurmation password are the same.
+      if (passwordController.text == confiurmPasswordController.text) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+      } else {
+        Navigator.pop(context);
+        errorLog("The password does not match");
+      } 
 
     } on FirebaseAuthException catch (e) {
 
       // pop up the circular progress to show the error message.
       Navigator.pop(context);
 
-      /* we can customize the following error  as follows.
-
+      /* error code message can be customize as follows.
       // login attempt errors
       if(e.code == "network-request-failed") {
         // netwo connection problems
-        errorLog("Connection Problem. Please check your internet connection.");
+        print(e.code);
+        errorLog(e.code);
       } else if(e.code == 'invalid-email') {
         // Invalid email address use
-        errorLog('Please Provide valid email address');
+        print(e.code);
+        errorLog(e.code);
       } else if(e.code == "invalid-credential") {
         // Incorrect email or password
-        errorLog('Envalid email and password');
+        print(e.code);
+        errorLog(e.code);
       }
-
       */
       errorLog(e.code);
     }
@@ -89,18 +97,18 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 30),
+                SizedBox(height: 20),
                 // logo
                 Icon(
                     Icons.home_rounded,
-                    size: 70,
+                    size: 40,
                     color: Colors.black,
                   ),
         
                 SizedBox(height: 25),
                 // welcome back, you've been missed
                 Text(
-                  "Welocme to BetLembosa",
+                  "Create a BetLembosa account",
                   style: TextStyle(
                     color: Colors.grey[700],
                     fontSize: 16,
@@ -120,32 +128,25 @@ class _LoginPageState extends State<LoginPage> {
                 // password text field
                 MyTextField(
                   controller: passwordController,
-                  hintText: "password",
+                  hintText: "Password",
                   obscureText: true,
                 ),
         
                 SizedBox(height: 10),
-                // forgoten password
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        "Forgot Password",
-                        style: TextStyle(color: Colors.grey[600]),
-                      ),
-                    ],
-                  ),
-                ),
-        
+                // confirmation password
+                MyTextField(
+                  controller: confiurmPasswordController,
+                  hintText: "Confirm Password",
+                  obscureText: true,
+                ),               
+
                 SizedBox(height: 25.0),
                 // sign in butoon
                 MyButton(
-                  onTap: signUserIn,
-                  title: 'Sign In',
+                  onTap: signUserUp,
+                  title: 'Sign Up',
                 ),
-                SizedBox(height: 50.0),
+                SizedBox(height: 30.0),
                 // or continue with
         
                 Padding(
@@ -175,7 +176,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 
-                SizedBox(height: 30.0),
+                SizedBox(height: 25.0),
         
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -189,19 +190,19 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
         
-                SizedBox(height: 20.0),
+                SizedBox(height: 30.0),
                 // not a menber reqister now!
         
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Not a menber?'),
+                    Text('Already have an Account?'),
                     const SizedBox(width: 4),
                     GestureDetector(
                       // register now on tap to change the page.
                       onTap: widget.onTap,
                       child: Text(
-                        'Register Now',
+                        'Login Now',
                         style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,
