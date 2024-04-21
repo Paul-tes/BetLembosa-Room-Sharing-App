@@ -20,26 +20,26 @@ class MyBottomNavBar extends StatelessWidget {
           GButton(
             icon: Icons.home,
             text: "Rooms",
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           ),
     
           GButton(
             icon: Icons.checklist_outlined,
             text: "Reservations",
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           ),
     
           GButton(
             icon: Icons.calendar_month,
             text: "Booking",
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           ),
     
-          GButton(
-            icon: Icons.add_business,
-            text: "My Rooms",
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          )
+          // GButton(
+          //   icon: Icons.add_business,
+          //   text: "My Rooms",
+          //   padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+          // )
         ]
       ),
     );

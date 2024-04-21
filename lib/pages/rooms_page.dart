@@ -1,3 +1,5 @@
+import 'package:betlembosa/components/room_tile.dart';
+import 'package:betlembosa/model/room.dart';
 import 'package:flutter/material.dart';
 
 class RoomsPage extends StatefulWidget {
@@ -70,11 +72,26 @@ class _RoomsPageState extends State<RoomsPage> {
           ),
         ),
 
+        const SizedBox(height: 15),
+
         // Lists of Rooms
         Expanded
         (child: ListView.builder(
+          itemCount: 5,
+          scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
-            return RoomTile();
+            // crete a room model
+            Room room = Room(
+              hostBy: "John Doe",
+              price: "100",
+              capacity: "2",
+              location: "123 Main Street, City, Country",
+              description: "Cozy room with a beautiful view",
+              imapgeUrl: 'lib/images/Rooms/room1.jpeg'
+            );
+            return RoomTile(
+              room: room,
+            );
           }
           ) 
         )
