@@ -12,6 +12,7 @@ class _RoomsPageState extends State<RoomsPage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        // search Bar
         Container(
           padding: EdgeInsets.all(12.0),
           margin: EdgeInsets.symmetric(horizontal: 25.0),
@@ -32,7 +33,52 @@ class _RoomsPageState extends State<RoomsPage> {
               )
             ],
           ),
+        ),
+
+        // Cool Message about betlembosa
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 25.0),
+          child: Text(
+            'BetLembosa Your Home',
+            style: TextStyle(color: Colors.grey[600]),
+          )
+        ),
+
+
+        // New Posts
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 25.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                'Amazing Rooms 🛏️ ',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24
+                ),
+              ),
+              Text(
+                "See All",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                ),
+              )
+            ],
+          ),
+        ),
+
+        // Lists of Rooms
+        Expanded
+        (child: ListView.builder(
+          itemBuilder: (context, index) {
+            return RoomTile();
+          }
+          ) 
         )
+
       ],
     );
   }
