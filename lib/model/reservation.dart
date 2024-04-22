@@ -137,6 +137,7 @@ class Reservation extends ChangeNotifier {
 
   // add room to reservation
   void reserve(Room room) {
+    rooms.remove(room); // Remove room from available rooms
     reservations.add(room);
     notifyListeners();
   }
@@ -145,6 +146,7 @@ class Reservation extends ChangeNotifier {
   // remove the room form reservation
   void removeReservation(Room room) {
     reservations.remove(room);
+    rooms.add(room); // Add room back to available rooms
     notifyListeners();
   }
 }

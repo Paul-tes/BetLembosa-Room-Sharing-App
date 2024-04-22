@@ -15,6 +15,7 @@ class MyBottomNavBar extends StatelessWidget {
         tabBackgroundColor: Colors.grey.shade100,
         mainAxisAlignment: MainAxisAlignment.center,
         tabBorderRadius: 16,
+        gap: 8,
         onTabChange: (value) => onTabChange!(value),
         tabs: const [
           GButton(
@@ -26,12 +27,6 @@ class MyBottomNavBar extends StatelessWidget {
           GButton(
             icon: Icons.checklist_outlined,
             text: "Reservations",
-            padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-          ),
-    
-          GButton(
-            icon: Icons.calendar_month,
-            text: "Booking",
             padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
           ),
         ]

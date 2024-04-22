@@ -1,4 +1,5 @@
 import 'package:betlembosa/components/reservation_item.dart';
+import 'package:betlembosa/model/reservation.dart';
 import 'package:betlembosa/model/room.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,10 +9,11 @@ class ReservationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
+    return Consumer<Reservation>(
       builder: (context, value, child) => Padding(
         padding: EdgeInsets.symmetric(horizontal: 25.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // heading ro reservation list pages,
             const Text(
@@ -27,14 +29,15 @@ class ReservationPage extends StatelessWidget {
             // Lists of reservation cards.
             Expanded(
               child: ListView.builder(
+                itemCount: value.getReservations().length,
                 itemBuilder: (context, index) {
                   // get all reserved rooms
                   Room room = value.getReservations()[index];
 
                   // return the reservation card for each room.
-                  return ReservationItem();
+                  return ReservationItem(room: room);
                 }
-              )
+              ),
             )
           ],
         )
