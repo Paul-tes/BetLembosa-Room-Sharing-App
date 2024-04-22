@@ -4,7 +4,7 @@ class Room {
   final String capacity;
   final String location;
   final String description;
-  final String imapgeUrl;
+  final String imageUrl;
 
   Room({
     required this.hostBy,
@@ -12,6 +12,6 @@ class Room {
     required this.capacity,
     required this.location,
     required this.description,
-    required this.imapgeUrl
+    required this.imageUrl
   });
 }

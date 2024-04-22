@@ -1,6 +1,8 @@
 import 'package:betlembosa/components/room_tile.dart';
+import 'package:betlembosa/model/reservation.dart';
 import 'package:betlembosa/model/room.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RoomsPage extends StatefulWidget {
   const RoomsPage({super.key});
@@ -10,9 +12,23 @@ class RoomsPage extends StatefulWidget {
 }
 
 class _RoomsPageState extends State<RoomsPage> {
+  // reservation method
+  void reserveRoom(Room room) {
+    Provider.of<Reservation>(context, listen: false).reserve(room);
+
+    // after reservation let's show a dialog message
+    showDialog(
+      context: context,
+      builder: (context) => const AlertDialog(
+        title: Text("Reservation Complate"),
+        content: Text("Check your reservation list now"),
+      )
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Consumer<Reservation>(builder: (context, value, child) => Column(
       children: [
         // search Bar
         Container(
@@ -22,7 +38,7 @@ class _RoomsPageState extends State<RoomsPage> {
             color: Colors.grey[200],
             borderRadius: BorderRadius.circular(8)
           ),
-          child: Row(
+          child: const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
@@ -77,20 +93,14 @@ class _RoomsPageState extends State<RoomsPage> {
         // Lists of Rooms
         Expanded
         (child: ListView.builder(
-          itemCount: 5,
+          itemCount: value.getRoomList().length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
-            // crete a room model
-            Room room = Room(
-              hostBy: "John Doe",
-              price: "100",
-              capacity: "2",
-              location: "123 Main Street, City, Country",
-              description: "Cozy room with a beautiful view",
-              imapgeUrl: 'lib/images/Rooms/room1.jpeg'
-            );
+            // return room lists form reservation using a provider state management class.
+            Room room = value.getRoomList()[index];
             return RoomTile(
               room: room,
+              addOnTap: () => reserveRoom(room),
             );
           }
           ) 
@@ -104,6 +114,6 @@ class _RoomsPageState extends State<RoomsPage> {
         ),
 
       ],
-    );
+    ),);
   }
 }

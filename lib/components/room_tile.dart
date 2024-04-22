@@ -2,13 +2,18 @@ import 'package:betlembosa/model/room.dart';
 import 'package:flutter/material.dart';
 
 class RoomTile extends StatelessWidget {
+  void Function()? addOnTap;
   Room room;
-  RoomTile({super.key, required this.room});
+  RoomTile({
+    super.key,
+    required this.room,
+    required this.addOnTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 10, bottom: 10),
+      margin: EdgeInsets.only(left: 10, bottom: 5),
       width: 230,
       decoration: BoxDecoration(
         color: Colors.grey[100],
@@ -20,16 +25,19 @@ class RoomTile extends StatelessWidget {
           
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.asset(room.imapgeUrl),
+            child: Image.asset(room.imageUrl),
           ),
 
           // Infos of the room is goes here.
           
           // Descripton
-          Text(
-            room.description + room.location,
-            style: TextStyle(
-              color: Colors.grey[600],
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 25.0),
+            child: Text(
+              room.description + room.location,
+              style: TextStyle(
+                color: Colors.grey[600],
+              ),
             ),
           ),
 
@@ -73,18 +81,21 @@ class RoomTile extends StatelessWidget {
                 ),
             
                 // Add Button
-                Container(
-                  padding: EdgeInsets.all(20),
-                  decoration: const BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(12),
-                      topRight: Radius.circular(12),
-                    )
-                  ),
-                  child: const Icon(
-                    Icons.add,
-                    color: Colors.white,
+                GestureDetector(
+                  onTap: addOnTap,
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    decoration: const BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        topRight: Radius.circular(12),
+                      )
+                    ),
+                    child: const Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ],
