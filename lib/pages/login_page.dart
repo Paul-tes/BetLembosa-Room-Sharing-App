@@ -91,11 +91,12 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 SizedBox(height: 30),
                 // logo
-                Icon(
-                    Icons.home_rounded,
-                    size: 70,
-                    color: Colors.black,
+                 SizedBox(
+                  child: Image.asset(
+                    'lib/images/logo.png',
                   ),
+                  height: 100,
+                ),
         
                 SizedBox(height: 25),
                 // welcome back, you've been missed

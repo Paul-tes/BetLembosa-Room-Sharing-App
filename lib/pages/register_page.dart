@@ -97,15 +97,14 @@ class _RegisterPage extends State<RegisterPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 20),
+                SizedBox(height: 30),
                 // logo
-                Icon(
-                    Icons.home_rounded,
-                    size: 40,
-                    color: Colors.black,
+                SizedBox(
+                  child: Image.asset(
+                    'lib/images/logo.png',
                   ),
-        
-                SizedBox(height: 25),
+                  height: 100,
+                ),
                 // welcome back, you've been missed
                 Text(
                   "Create a BetLembosa account",

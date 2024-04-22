@@ -8,8 +8,8 @@ class RoomTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 10, bottom: 25),
-      width: 200,
+      margin: EdgeInsets.only(left: 10, bottom: 10),
+      width: 230,
       decoration: BoxDecoration(
         color: Colors.grey[100],
         borderRadius: BorderRadius.circular(12),
@@ -17,7 +17,7 @@ class RoomTile extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-
+          
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image.asset(room.imapgeUrl),
@@ -51,40 +51,44 @@ class RoomTile extends StatelessWidget {
 
           // price
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-
-              Column(
-                children: [
-                  // price
-                   Text(
-                    room.price,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red[300],
-                      fontSize: 30,
+          Padding(
+            padding: const EdgeInsets.only(left: 15.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+            
+                Column(
+                  children: [
+                    // price
+                     Text(
+                      room.price,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red[300],
+                        fontSize: 30,
+                      ),
                     ),
+                  ],
+                ),
+            
+                // Add Button
+                Container(
+                  padding: EdgeInsets.all(20),
+                  decoration: const BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(12),
+                      topRight: Radius.circular(12),
+                    )
                   ),
-                ],
-              ),
-
-              // Add Button
-              Container(
-                padding: EdgeInsets.all(20),
-                decoration: const BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(12),
-                    topRight: Radius.circular(12),
-                  )
+                  child: const Icon(
+                    Icons.add,
+                    color: Colors.white,
+                  ),
                 ),
-                child: const Icon(
-                  Icons.add,
-                  color: Colors.white,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
 
         ],

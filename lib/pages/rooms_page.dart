@@ -94,7 +94,14 @@ class _RoomsPageState extends State<RoomsPage> {
             );
           }
           ) 
-        )
+        ),
+
+        const Padding(
+          padding: EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
+          child: Divider(
+          color: Colors.white
+          )
+        ),
 
       ],
     );
